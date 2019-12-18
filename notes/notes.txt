@@ -1,0 +1,38 @@
+
+## Tips to use Gmail as the Postfix relay for email
+https://www.linode.com/docs/email/postfix/configure-postfix-to-send-mail-using-gmail-and-google-apps-on-debian-or-ubuntu/
+
+https://www.howtoforge.com/tutorial/configure-postfix-to-use-gmail-as-a-mail-relay/
+
+https://support.google.com/mail/?p=InvalidSecondFactor c125sm12027339oia.56 - gsmtp)
+
+## Issues with NFS and Macos Catalina
+
+Then, in MacOS Catalina, navigate to System Preferences → Security & Privacy → Privacy → Full Disk Access and press '+' then Command-Shift-G and enter the /sbin directory and find the nfsd file and add that to Full Disk Access.
+
+## Notes
+
+/etc/php/7.0/apache2/php.ini
+
+/etc/mysql/my.cnf
+/etc/mysql/conf.d/mysql.cnf
+
+
+## Debug Vagrant with
+vagrant up --debug &> vagrant.log
+
+# Custom
+file { '/etc/php/7.0/apache2/php.ini':
+  ensure  => file,
+  owner   => 'root',
+  group   => 'root',
+  mode    => '0644',
+  source  => '/vagrant/files/etc/php7/php.ini',
+  require => Package['apache2'],
+  notify  => Service['apache2'],
+}
+
+
+Error: tar -xzvf /vagrant/phpmyadmin.tar.gz returned 2 instead of one of [0]
+==> default: Error: /Stage[setup]/Phpmyadmin::Install/Exec[untar-phpmyadmin]/returns: change from notrun to 0 failed: tar -xzvf
+ /vagrant/phpmyadmin.tar.gz returned 2 instead of one of [0]
