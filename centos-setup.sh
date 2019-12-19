@@ -120,6 +120,6 @@ sudo wp core config --dbname=wordpress --dbuser=wordpress --dbpass=wordpress --d
 sudo wp core install --url=wp.swamp.local --title=Site_Title --admin_user=root --admin_password=vagrant --admin_email=wordpress@swamp.local
 
 # Instal Drupal Varbase - Development ladden Drupal Distrobution.
-cd /vagrant/sites/drupal-8
+# cd /vagrant/sites/drupal-8
 # Use PHP Composer to install Drupal Varbase
 # sudo composer create-project Vardot/varbase-project:^8.7.3 /vagrant/sites/drupal-8 --no-dev --no-interaction
