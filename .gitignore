@@ -2,6 +2,7 @@
 .DS_Store
 .DS_Store?
 ._*
+backups/
 sites/db
 sites/dev
 sites/log
