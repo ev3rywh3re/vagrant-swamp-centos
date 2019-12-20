@@ -6,5 +6,5 @@ backups/
 sites/db
 sites/dev
 sites/log
-sites/wp
-sites/drupal-8
+sites/wordpress
+sites/drupal
