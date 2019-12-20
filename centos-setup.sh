@@ -2,6 +2,19 @@
 
 echo '-!!!- Centos Setup Script -!!!-'
 
+# Define and make sites/ directories.
+dir_sites_httpd_logs = /vagrant/sites/log
+dir_sites_db = /vagrant/sites/db
+dir_sites_dev = /vagrant/sites/dev
+dir_sites_wordpress = /vagrant/sites/wordpress
+dir_sites_drupal = /vagrant/sites/drupal
+
+[ ! -d "${dir_sites_httpd_logs}" ] && mkdir ${dir_sites_httpd_logs}
+[ ! -d "${dir_sites_db}" ] && mkdir ${dir_sites_db}
+[ ! -d "${dir_sites_dev}" ] && mkdir ${dir_sites_dev}
+[ ! -d "${dir_sites_wordpress}" ] && mkdir ${dir_sites_wordpress}
+[ ! -d "${dir_sites_drupal}" ] && mkdir ${dir_sites_drupal}
+
 # Install httpd and dependencies
 sudo yum -y install wget
 sudo yum -y install httpd
@@ -113,7 +126,7 @@ sudo mv wp-cli.phar /usr/local/bin/wp
 # sudo mysql -u root --password="vagrant" -e "use mysql; update user SET PASSWORD=PASSWORD('vagrant') WHERE USER='root'; flush privileges;"
 sudo mysql -u root -p'vagrant' -e "CREATE DATABASE IF NOT EXISTS wordpress; GRANT ALL PRIVILEGES ON wordpress.* TO 'wordpress'@'%' IDENTIFIED BY 'wordpress'; GRANT ALL PRIVILEGES ON wordpress.* TO 'wordpress'@'localhost' IDENTIFIED BY 'wordpress'; flush privileges;"
 
-sudo cd /vagrant/sites/wp
+sudo cd ${dir_sites_wordpress}
 
 sudo wp core download
 sudo wp core config --dbname=wordpress --dbuser=wordpress --dbpass=wordpress --dbhost=127.0.0.1 --dbprefix=wp_
