@@ -1,6 +1,6 @@
 # Vagrant Swamp - CentOS
 
-This is a total mess of a VM for local web development. The intention is load some tools like phpMyAdmin and auto load a few web apps like WordPress and Drupal. It was originally built for my old laptop that needed something with low requirements, and now it's my light web development VM sketchbook.
+This is a total mess of a VM for local web development. The intention is to load some tools like phpMyAdmin and a few web apps like WordPress and Drupal. It was originally built for my old laptop that needed something with low requirements, and now it's become my light web development VM sketchbook. I use it for web development and experimentation. This version uses CentOS as the Linux distribution. 
 
 This project has a simple set of goals:
 
