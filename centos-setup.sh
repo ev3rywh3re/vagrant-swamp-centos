@@ -9,12 +9,6 @@ dir_sites_dev = /vagrant/sites/dev
 dir_sites_wordpress = /vagrant/sites/wordpress
 dir_sites_drupal = /vagrant/sites/drupal
 
-[ ! -d "${dir_sites_httpd_logs}" ] && mkdir ${dir_sites_httpd_logs}
-[ ! -d "${dir_sites_db}" ] && mkdir ${dir_sites_db}
-[ ! -d "${dir_sites_dev}" ] && mkdir ${dir_sites_dev}
-[ ! -d "${dir_sites_wordpress}" ] && mkdir ${dir_sites_wordpress}
-[ ! -d "${dir_sites_drupal}" ] && mkdir ${dir_sites_drupal}
-
 # Install httpd and dependencies
 sudo yum -y install wget
 sudo yum -y install httpd
@@ -36,6 +30,13 @@ sudo yum-config-manager --enable remi-php72
 sudo yum -y update
 # Install Apache & PHP dependencies
 # --------------------
+
+# check and make default locations
+[ ! -d "${dir_sites_httpd_logs}" ] && mkdir ${dir_sites_httpd_logs}
+[ ! -d "${dir_sites_db}" ] && mkdir ${dir_sites_db}
+[ ! -d "${dir_sites_dev}" ] && mkdir ${dir_sites_dev}
+[ ! -d "${dir_sites_wordpress}" ] && mkdir ${dir_sites_wordpress}
+[ ! -d "${dir_sites_drupal}" ] && mkdir ${dir_sites_drupal}
 
 # Install MariaDB
 # ---------------
@@ -136,6 +137,7 @@ sudo wp core config --dbname=wordpress --dbuser=wordpress --dbpass=wordpress --d
 sudo wp core install --url=wp.swamp.local --title=Site_Title --admin_user=root --admin_password=vagrant --admin_email=wordpress@swamp.local
 
 # Instal Drupal Varbase - Development ladden Drupal Distrobution.
-# cd /vagrant/sites/drupal-8
+sudo cd ${dir_sites_drupal}
 # Use PHP Composer to install Drupal Varbase
 # sudo composer create-project Vardot/varbase-project:^8.7.3 /vagrant/sites/drupal-8 --no-dev --no-interaction
+sudo composer create-project --prefer-dist drupal/recommended-project ${dir_sites_drupal}
