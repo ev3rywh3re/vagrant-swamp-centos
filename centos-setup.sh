@@ -8,8 +8,11 @@ sudo yum -y install httpd
 sudo yum -y install git
 sudo yum -y install unzip
 
-# Setup REMI repository. Install php
+# install drush
+sudo yum -y install drush
+sudo yum -y install curl
 
+# Setup REMI repository. Install php
 sudo yum -y install epel-release
 sudo wget -q http://rpms.remirepo.net/enterprise/remi-release-7.rpm
 sudo wget -q https://dl.fedoraproject.org/pub/epel/epel-release-latest-7.noarch.rpm
