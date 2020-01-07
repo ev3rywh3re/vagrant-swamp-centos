@@ -46,9 +46,9 @@ Vagrant.configure(VAGRANTFILE_API_VERSION) do |config|
   # Issue: for some reason I haven't been able to combine this with $pb_script
   # config.vm.provision :shell, inline: "sudo setenforce 0", run: "always"
   config.vm.provision :shell, inline: "sudo sed -i 's/enforcing/disabled/g' /etc/selinux/config", run: "always"
+
   # Add path to sudoers
   config.vm.provision :shell, inline: "sudo sed -i 's|/usr/bin|/usr/bin:/usr/local/bin|g' /etc/sudoers", run: "always"
-
 
   # Early installation and configurations.
   # Disable selinux, install updates, install helper tools.
