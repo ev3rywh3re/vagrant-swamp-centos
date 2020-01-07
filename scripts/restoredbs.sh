@@ -2,8 +2,14 @@
 
 USER="root"
 PASSWORD="vagrant"
+DIR_BAKS=/vagrant/backups/
 
-cd /vagrant/backups/
+if [ -z "$(ls -A ${DIR_BAKS})" ]; then
+   echo "No backup database files!"
+   exit 0
+fi
+
+cd ${DIR_BAKS}
 
 databases=`ls -1 *.sql`
 
