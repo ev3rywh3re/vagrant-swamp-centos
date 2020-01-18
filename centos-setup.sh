@@ -9,20 +9,17 @@ dir_sites_dev = /vagrant/sites/dev
 dir_sites_wordpress = /vagrant/sites/wordpress
 dir_sites_drupal = /vagrant/sites/drupal
 
-[ ! -d "${dir_sites_httpd_logs}" ] && mkdir ${dir_sites_httpd_logs}
-[ ! -d "${dir_sites_db}" ] && mkdir ${dir_sites_db}
-[ ! -d "${dir_sites_dev}" ] && mkdir ${dir_sites_dev}
-[ ! -d "${dir_sites_wordpress}" ] && mkdir ${dir_sites_wordpress}
-[ ! -d "${dir_sites_drupal}" ] && mkdir ${dir_sites_drupal}
-
 # Install httpd and dependencies
 sudo yum -y install wget
 sudo yum -y install httpd
 sudo yum -y install git
 sudo yum -y install unzip
 
-# Setup REMI repository. Install php
+# install drush
+sudo yum -y install drush
+sudo yum -y install curl
 
+# Setup REMI repository. Install php
 sudo yum -y install epel-release
 sudo wget -q http://rpms.remirepo.net/enterprise/remi-release-7.rpm
 sudo wget -q https://dl.fedoraproject.org/pub/epel/epel-release-latest-7.noarch.rpm
@@ -33,6 +30,13 @@ sudo yum-config-manager --enable remi-php72
 sudo yum -y update
 # Install Apache & PHP dependencies
 # --------------------
+
+# check and make default locations
+[ ! -d "${dir_sites_httpd_logs}" ] && mkdir ${dir_sites_httpd_logs}
+[ ! -d "${dir_sites_db}" ] && mkdir ${dir_sites_db}
+[ ! -d "${dir_sites_dev}" ] && mkdir ${dir_sites_dev}
+[ ! -d "${dir_sites_wordpress}" ] && mkdir ${dir_sites_wordpress}
+[ ! -d "${dir_sites_drupal}" ] && mkdir ${dir_sites_drupal}
 
 # Install MariaDB
 # ---------------
@@ -137,6 +141,7 @@ else
 fi
 
 # Instal Drupal Varbase - Development ladden Drupal Distrobution.
-# cd /vagrant/sites/drupal-8
+sudo cd ${dir_sites_drupal}
 # Use PHP Composer to install Drupal Varbase
 # sudo composer create-project Vardot/varbase-project:^8.7.3 /vagrant/sites/drupal-8 --no-dev --no-interaction
+sudo composer create-project --prefer-dist drupal/recommended-project ${dir_sites_drupal}
