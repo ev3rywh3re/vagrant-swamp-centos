@@ -126,11 +126,15 @@ sudo mv wp-cli.phar /usr/local/bin/wp
 # sudo mysql -u root --password="vagrant" -e "use mysql; update user SET PASSWORD=PASSWORD('vagrant') WHERE USER='root'; flush privileges;"
 sudo mysql -u root -p'vagrant' -e "CREATE DATABASE IF NOT EXISTS wordpress; GRANT ALL PRIVILEGES ON wordpress.* TO 'wordpress'@'%' IDENTIFIED BY 'wordpress'; GRANT ALL PRIVILEGES ON wordpress.* TO 'wordpress'@'localhost' IDENTIFIED BY 'wordpress'; flush privileges;"
 
-sudo cd ${dir_sites_wordpress}
-
-sudo wp core download
-sudo wp core config --dbname=wordpress --dbuser=wordpress --dbpass=wordpress --dbhost=127.0.0.1 --dbprefix=wp_
-sudo wp core install --url=wp.swamp.local --title=Site_Title --admin_user=root --admin_password=vagrant --admin_email=wordpress@swamp.local
+if [ ! -f "${dir_sites_wordpress}"/wp-config.php ]; then
+  echo "Installing - WordPress!"
+  cd "${dir_sites_wordpress}"
+  sudo wp core download
+  sudo wp core config --dbname=wordpress --dbuser=wordpress --dbpass=wordpress --dbhost=127.0.0.1 --dbprefix=wp_
+  sudo wp core install --url=wp.swamp.local --title=Site_Title --admin_user=root --admin_password=vagrant --admin_email=wordpress@swamp.local
+else
+  echo "WordPress already installed!"
+fi
 
 # Instal Drupal Varbase - Development ladden Drupal Distrobution.
 # cd /vagrant/sites/drupal-8
