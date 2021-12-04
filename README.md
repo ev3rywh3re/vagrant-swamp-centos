@@ -1,6 +1,6 @@
 # Vagrant Swamp - CentOS
 
-This is a total mess of a VM for local web development. The intention is to load some tools like phpMyAdmin and a few web apps like WordPress and Drupal. It was originally built for my old laptop that needed something with low requirements, and now it's become my light web development VM sketchbook. I use it for web development and experimentation. This version uses CentOS as the Linux distribution. 
+This is a total mess of a VM for local web development. The intention is to load some tools like phpMyAdmin and a few web apps like WordPress and Drupal. It was originally built for my old laptop that needed something with low requirements, and now it's become my light web development VM sketchbook. I use it for web development and experimentation. This version uses CentOS as the Linux distribution.
 
 This project has a simple set of goals:
 
@@ -41,11 +41,13 @@ These are the basic applications and utilities that need to be installed.
 1. Install VirtualBox by visiting (https://www.virtualbox.org), downloading the latest version, and running the downloaded installation application.
 2. Install Vagrant by visiting (https://www.vagrantup.com/), downloading the latest version, and running the downloaded installation application.
 3. Install Vagrant - hostsupdater by using a command line utility (on MacOS use Terminal and on Windows use CMD). The command to use is `# vagrant plugin install vagrant-hostsupdater`
-4. It may be necessary to  install the Vagrant guest additions for your system. `# vagrant plugin install vagrant-vbguest`
+4. It may be necessary to  install the Vagrant guest additions for your system. `# vagrant plugin install vagrant-vbguest` This may also require installation of an older version of the vbguest plugin if you get errors like (https://www.devopsroles.com/vagrant-no-virtualbox-guest-additions-installation-found-fixed/):
+`# vagrant plugin uninstall vagrant-vbguest`
+`# vagrant plugin install vagrant-vbguest --plugin-version 0.21`
 5. Recent versions have Vagrant trigger options build in, but for older versions you may need to install this plugin for triggers. To preserve the databases between destroy & up you will need Vagrant Trigger options. `# vagrant plugin install vagrant-triggers`
+6. I use another plugin to restart the vm after disabling SELinux.
+`# vagrant plugin install vagrant-reload`
 
-more to restart vagrant
-vagrant plugin install vagrant-reload
 
 ### Simple WordPress Vagrant Installation
 

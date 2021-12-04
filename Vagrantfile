@@ -23,7 +23,7 @@ Vagrant.configure(VAGRANTFILE_API_VERSION) do |config|
   # config.vm.box = "debian/jessie64"
 
   config.vm.hostname = "swamp.local"
-  config.vm.network :private_network, ip: "192.168.33.28"
+  config.vm.network :private_network, ip: "192.168.56.24"
 
   # trying to fix browsersync
   config.vm.network :forwarded_port, guest: 8181, host: 80, auto_correct: true
@@ -56,6 +56,7 @@ Vagrant.configure(VAGRANTFILE_API_VERSION) do |config|
     sudo yum -y install epel-release yum-utils
     sudo yum -y install yum-plugin-replace
     sudo yum -y update
+    /vagrant/scripts/selinux-disable.sh
   SCRIPT
 
   Vagrant.configure("2") do |config|
@@ -68,16 +69,18 @@ Vagrant.configure(VAGRANTFILE_API_VERSION) do |config|
   # If you have problems TRY: # vagrant plugin install vagrant-vbguest
   # config.vm.synced_folder ".", "/vagrant", owner: "vagrant", group: "vagrant"
   # config.vm.synced_folder ".", "/vagrant", type: "virtualbox"
-  # Synced folder with custom open permissions.
-  # config.vm.synced_folder ".", "/vagrant", type: "virtualbox", mount_options: ["dmode=777", "fmode=777"]
 
-  nfsPath = "."
-  if Dir.exist?("/System/Volumes/Data")
-      nfsPath = "/System/Volumes/Data" + Dir.pwd
-  end
+  # Synced folder with custom open permissions.
+  config.vm.synced_folder ".", "/vagrant", type: "virtualbox", mount_options: ["dmode=777", "fmode=777"]
+
+  # nfsPath = "."
+  # if Dir.exist?("/System/Volumes/Data")
+  #     nfsPath = "/System/Volumes/Data" + Dir.pwd
+  # end
+
   # config.vm.synced_folder nfsPath, "/vagrant", type: "nfs", mount_options: ['actimeo=1']
 
-  config.vm.synced_folder nfsPath, "/vagrant", id: "vagrant", mount_options: ["rw", "tcp", "nolock", "noacl", "async"], type: "nfs", nfs_udp: false
+  # config.vm.synced_folder nfsPath, "/vagrant", id: "vagrant", mount_options: ["rw", "tcp", "nolock", "noacl", "async"], type: "nfs", nfs_udp: false
 
   # config.vm.synced_folder , "/vagrant", type: "nfs", :mount_options => ["dmode=777","fmode=777"]
   # config.vm.synced_folder nfsPath, "/vagrant", owner: "vagrant", group: "vagrant"
